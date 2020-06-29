@@ -2,6 +2,9 @@
 from flask import Flask, jsonify, make_response, request
 import requests
 import secrets
+import eventlet.wsgi
+
+
 app = Flask(__name__)
 
 ip = "68.183.89.127"
@@ -40,4 +43,6 @@ def listenb2b():
 
 
 if __name__ == '__main__':
-    app.run(debug=True,port="8080")
+    # app.run(debug=True,port="8080")
+    eventlet.wsgi.server(eventlet.listen(('', 8080)), app)
+
