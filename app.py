@@ -3,7 +3,9 @@ from flask import Flask, jsonify, make_response, request
 import requests
 import secrets
 import eventlet.wsgi
+import logging
 
+logging.basicConfig(filename="mpesa.log",filemode="a",format='%(name)s - %(levelname)s - %(message)s')
 
 app = Flask(__name__)
 
