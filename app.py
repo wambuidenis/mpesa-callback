@@ -14,9 +14,9 @@ ip = "68.183.89.127"
 
 @app.route('/mpesa/b2c/v1', methods=["POST"])
 def listenb2c():
-    print("we got hit")
     # save the data
     request_data = request.data
+    logging.info("Callback url called with the data ", request_data)
     # Perform your processing here e.g. print it out...
     requests.post(f"http://{ip}:1000/payments/status", json= {"payment_info": f"'{request_data.decode()}'"})
     # Prepare the response, assuming no errors have occurred. Any response
