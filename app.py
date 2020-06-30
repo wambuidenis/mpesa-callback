@@ -18,7 +18,7 @@ def listenb2c():
     request_data = request.data
     logging.info("Callback url called with the data ", request_data)
     # Perform your processing here e.g. print it out...
-    requests.post(f"http://{ip}:1000/payments/status", json= {"payment_info": f"'{request_data.decode()}'"})
+    requests.post(f"http://{ip}:1000/payment/status", json= {"payment_info": f"'{request_data.decode()}'"})
     # Prepare the response, assuming no errors have occurred. Any response
     # other than a 0 (zero) for the 'ResultCode' during Validation only means
     # an error occurred and the transaction is cancelled
