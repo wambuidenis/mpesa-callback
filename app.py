@@ -9,7 +9,8 @@ logging.basicConfig(filename="mpesa.log",filemode="a",format='%(name)s - %(level
 
 app = Flask(__name__)
 
-ip = "68.183.89.127"
+ip = "68.183.89.127
+# ip = "localhost"
 # You may create a separate URL for every endpoint you need
 
 @app.route('/mpesa/b2c/v1', methods=["POST"])
@@ -18,7 +19,7 @@ def listenb2c():
     request_data = request.data
     logging.info("Callback url called with the data ", request_data)
     # Perform your processing here e.g. print it out...
-    requests.post(f"http://{ip}:9000/payment/status", json= {"payment_info": f"'{request_data.decode()}'"})
+    requests.post(f"http://{ip}:9000/payment/status", json= jsonify(request_data.decode()))
 
     # here we are going to emit and event for the key
     # Prepare the response, assuming no errors have occurred. Any response
