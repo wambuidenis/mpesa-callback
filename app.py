@@ -18,6 +18,7 @@ def listenb2c():
     # save the data
     request_data = request.data
     logging.info("Callback url called with the data ", request_data)
+    print(request_data.decode())
     # Perform your processing here e.g. print it out...
     requests.post(f"http://{ip}:9000/payment/status", json=jsonify(request_data.decode()))
     requests.post(f"http://{ip}:9000/payment/status", json=request_data.decode())
