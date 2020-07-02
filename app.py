@@ -17,8 +17,9 @@ def listenb2c():
     # save the data
     request_data = request.data
     logging.info("Callback url called with the data ", request_data)
+    print(request_data)
     # Perform your processing here e.g. print it out...
-    requests.post(f"http://{ip}:9000/payment/status", json= {"payment_info": f"'{request_data.decode()}'"})
+    requests.post(f"http://68.183.89.127:9000/payment/status", json= {"payment_info": f"'{request_data.decode()}'"})
 
     # here we are going to emit and event for the key
     # Prepare the response, assuming no errors have occurred. Any response
