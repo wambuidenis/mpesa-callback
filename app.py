@@ -1,6 +1,6 @@
 # import the Flask Framework
 from flask import Flask, jsonify, make_response, request
-# import requests
+import requests
 import secrets
 import eventlet.wsgi
 import logging
@@ -9,8 +9,7 @@ logging.basicConfig(filename="mpesa.log",filemode="a",format='%(name)s - %(level
 
 app = Flask(__name__)
 
-# ip = ""
-# ip = "localhost"
+ip = "68.183.89.127"
 # You may create a separate URL for every endpoint you need
 
 @app.route('/mpesa/b2c/v1', methods=["POST"])
@@ -18,9 +17,8 @@ def listenb2c():
     # save the data
     request_data = request.data
     logging.info("Callback url called with the data ", request_data)
-    print(request_data.decode())
     # Perform your processing here e.g. print it out...
-    requests.post(f"http://68.183.89.127:9000/payment/status", json=request_data.decode())
+    requests.post(f"http://{ip}:4000/payment/status", json= {"payment_info": f"'{request_data.decode()}'"})
 
     # here we are going to emit and event for the key
     # Prepare the response, assuming no errors have occurred. Any response
