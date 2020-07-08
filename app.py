@@ -19,7 +19,7 @@ def listenb2c():
     logging.info("Callback url called with the data ", request_data)
     decoded = request_data.decode()
     # Perform your processing here e.g. print it out...
-    requests.post(f"http://{ip}:9000/payment/status", json=decoded)
+    requests.post(f"http://{ip}:4000/payment/status", json=decoded)
 
     # here we are going to emit and event for the key
     # Prepare the response, assuming no errors have occurred. Any response
@@ -42,7 +42,7 @@ def reversals():
     logging.info("Callback url called with the data ", request_data)
     decoded = request_data.decode()
     # Perform your processing here e.g. print it out...
-    requests.post(f"http://{ip}:9000/payment/status/reversal", json=decoded)
+    requests.post(f"http://{ip}:4000/payment/status/reversal", json=decoded)
 
     # here we are going to emit and event for the key
     # Prepare the response, assuming no errors have occurred. Any response
@@ -69,6 +69,8 @@ def listenb2b():
         "ThirdPartyTransID": "1234567890"
     }
     return message
+
+
 
 
 if __name__ == '__main__':
