@@ -95,8 +95,11 @@ def listenb2c():
     return jsonify({'message': message}), 200
 
 
+print("?????running")
+
 @app.route("/mpesa/reversals", methods=["POST"])
 def reversals():
+    print("we hae been hit")
     # save the data
     request_data = request.data
     logging.info("Callback url called with the data ", request_data)
