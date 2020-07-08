@@ -5,11 +5,13 @@ import secrets
 import eventlet.wsgi
 import logging
 
-logging.basicConfig(filename="mpesa.log",filemode="a",format='%(name)s - %(levelname)s - %(message)s')
+logging.basicConfig(filename="mpesa.log", filemode="a", format='%(name)s - %(levelname)s - %(message)s')
 
 app = Flask(__name__)
 
 ip = "68.183.89.127"
+
+
 # You may create a separate URL for every endpoint you need
 
 @app.route('/mpesa/b2c/v1', methods=["POST"])
@@ -34,8 +36,7 @@ def listenb2c():
     return jsonify({'message': message}), 200
 
 
-
-@app.route("/mpesa/reversals",methods=["POST"])
+@app.route("/mpesa/reversals", methods=["POST"])
 def reversals():
     # save the data
     request_data = request.data
@@ -57,7 +58,6 @@ def reversals():
     return jsonify({'message': message}), 200
 
 
-
 # Change this part to reflect the API you are testing
 @app.route('/mpesa/b2b/v1')
 def listenb2b():
@@ -71,9 +71,6 @@ def listenb2b():
     return message
 
 
-
-
 if __name__ == '__main__':
-    # app.run(debug=True,port="8080")
-    eventlet.wsgi.server(eventlet.listen(('', 8080)), app)
-
+    app.run(debug=True,port="8080")
+    # eventlet.wsgi.server(eventlet.listen(('', 8080)), app)
