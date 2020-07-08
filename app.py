@@ -5,9 +5,20 @@ import secrets
 import eventlet.wsgi
 import logging
 
+from flask import Flask
+from flask_marshmallow import Marshmallow
+from flask_sqlalchemy import SQLAlchemy
+from .payment import Mpesa, MpesaSchema, Payments,PaymentSchema
+
 logging.basicConfig(filename="mpesa.log", filemode="a", format='%(name)s - %(levelname)s - %(message)s')
 
 app = Flask(__name__)
+# basedir  = os.path.abspath(os.path.dirname(__file__))
+app.config["SQLALCHEMY_DATABASE_URI"] = "mysql+mysqlconnector://root:japanitoes@localhost:3306/fuprox"
+app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+db = SQLAlchemy(app)
+ma = Marshmallow(app)
 
 ip = "68.183.89.127"
 
@@ -18,8 +29,14 @@ ip = "68.183.89.127"
 def listenb2c():
     # save the data
     request_data = request.data
+    print(request_data)
+    lookup = Payments(request_data)
+    db.session.add(lookup)
+    db.session.commit()
+
     logging.info("Callback url called with the data ", request_data)
     decoded = request_data.decode()
+
     # Perform your processing here e.g. print it out...
     requests.post(f"http://{ip}:4000/payment/status", json=decoded)
 
@@ -27,6 +44,7 @@ def listenb2c():
     # Prepare the response, assuming no errors have occurred. Any response
     # other than a 0 (zero) for the 'ResultCode' during Validation only means
     # an error occurred and the transaction is cancelled
+
     message = {
         "ResultCode": 0,
         "ResultDesc": "The service was accepted successfully",
