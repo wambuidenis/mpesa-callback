@@ -8,7 +8,7 @@ import logging
 
 app = Flask(__name__)
 logging.basicConfig(filename="mpesa.log", filemode="a", format='%(name)s - %(levelname)s - %(message)s')
-ip = "68.183.89.127"
+ip = "159.65.144.235"
 
 
 # You may create a separate URL for every endpoint you need
