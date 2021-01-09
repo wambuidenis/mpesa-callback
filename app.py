@@ -8,7 +8,7 @@ import logging
 
 app = Flask(__name__)
 logging.basicConfig(filename="mpesa.log", filemode="a", format='%(name)s - %(levelname)s - %(message)s')
-ip = "68.183.89.127"
+ip = "159.65.144.235"
 
 
 # You may create a separate URL for every endpoint you need
@@ -19,8 +19,8 @@ def listenb2c():
     logging.info("Callback url called with the data ", request_data)
     decoded = request_data.decode()
     # Perform your processing here e.g. print it out...
+    print(decoded)
     requests.post(f"http://{ip}:4000/payment/status", json=decoded)
-
     # here we are going to emit and event for the key
     # Prepare the response, assuming no errors have occurred. Any response
     # other than a 0 (zero) for the 'ResultCode' during Validation only means
