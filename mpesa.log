@@ -2,3 +2,5 @@ werkzeug - INFO -  * Running on http://127.0.0.1:8080/ (Press CTRL+C to quit)
 werkzeug - INFO -  * Restarting with stat
 werkzeug - WARNING -  * Debugger is active!
 werkzeug - INFO -  * Debugger PIN: 240-512-862
+werkzeug - INFO -  * Running on http://0.0.0.0:65123/ (Press CTRL+C to quit)
+werkzeug - INFO - 127.0.0.1 - - [28/May/2021 16:39:24] "[37mPOST /mpesa/b2c/v1 HTTP/1.1[0m" 200 -
